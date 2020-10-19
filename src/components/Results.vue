@@ -11,25 +11,9 @@
                 <div class="w-full border-b my-5"></div> 
 
                 <div class="flex lg:flex-row flex-col">
-                    <div class="flex flex-col mt-2 items-center mx-3 text-indigo-300">
-                        <div class="text-4xl font-bold">{{ questions.filter(question => question.weight == 1).length }}</div>
-                        <div class="text-lg font-bold uppercase">Minor</div>
-                    </div>
-                    <div class="flex flex-col mt-2 items-center mx-3 text-indigo-500">
-                        <div class="text-4xl font-bold">{{ questions.filter(question => question.weight == 2).length }}</div>
-                        <div class="text-lg font-bold uppercase">Immoral</div>
-                    </div>
-                    <div class="flex flex-col mt-2 items-center mx-3 text-indigo-700">
-                        <div class="text-4xl font-bold">{{ questions.filter(question => question.weight == 3).length }}</div>
-                        <div class="text-lg font-bold uppercase">Raunchy</div>
-                    </div>
-                    <div class="flex flex-col mt-2 items-center mx-3 text-indigo-900">
-                        <div class="text-4xl font-bold">{{ questions.filter(question => question.weight == 4).length }}</div>
-                        <div class="text-lg font-bold uppercase">Scandalous</div>
-                    </div>
-                    <div class="flex flex-col mt-2 items-center mx-3 text-red-800">
-                        <div class="text-4xl font-bold">{{ questions.filter(question => question.weight == 5).length }}</div>
-                        <div class="text-lg font-bold uppercase">Unspeakable</div>
+                    <div :class='"flex flex-col mt-2 items-center mx-3 " + description.class' v-for="(description, i) in descriptions" :key="i">
+                        <div class="text-4xl font-bold">{{ questions.filter(question => question.weight == i + 1).length }}</div>
+                        <div class="text-lg font-bold uppercase">{{ description.text }}</div>
                     </div>
                 </div>
             </div>
@@ -38,7 +22,10 @@
 </template>
 
 <script>
+    import descriptions from '../data/descriptions';
+
     export default {
+        data: () => ({ descriptions }),
         props: ['score', 'questions']
     }
 </script>

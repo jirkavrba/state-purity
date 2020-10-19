@@ -16,6 +16,7 @@
                     <img src="../assets/check-circle.svg" class="inline mr-2"/>
                 </slide-up-down>
                 <div class="text-xl lg:text-3xl mt-5 font-bold text-center" style="min-height: 200px;">
+                    <div :class='"uppercase text-sm " + descriptions[questions[currentQuestion].weight - 1].class'>{{ descriptions[questions[currentQuestion].weight - 1].text }}</div>
                     <span :class='questions[currentQuestion].checked ? "text-green-500" : "text-indigo-800"'>
                         {{ questions[currentQuestion].content }}
                     </span>
@@ -41,8 +42,11 @@
 </style>
 
 <script>
+    import descriptions from '../data/descriptions';
+
     export default {
         data: () => ({
+            descriptions,
             currentQuestion: 0,
         }),
         methods: {
